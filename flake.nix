@@ -13,7 +13,6 @@
            ./configs/vultr.nix
             disko.nixosModules.disko
            ./disk-config.nix
-          ];
           {
           _module.args.disks = [ "/dev/sda" ];
           disko.devices = import ./disk-config.nix {
