@@ -1,5 +1,5 @@
 # Example to create a bios compatible gpt partition
-{ lib, disks ? [ "/dev/sda" ], ... }: {
+{ lib, disks ? [ "/dev/vda" ], ... }: {
   disko.devices = if (lib.length disks == 1) then {
     disk = {
       one = {
