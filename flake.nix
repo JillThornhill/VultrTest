@@ -12,7 +12,7 @@
       system = "x86_64-linux";
       specialArgs = attrs;
       modules = [
-        ./configs/universal_dhcp.nix
+        ./configs/vconf.nix
         disko.nixosModules.disko
         ./disk-config.nix
         {
