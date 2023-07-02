@@ -8,47 +8,7 @@
   inputs.nixos-anywhere.inputs.nixpkgs.follows = "nixpkgs";
 
   outputs = { self, nixpkgs, disko, nixos-anywhere, ... }@attrs: {
-    nixosConfigurations.fnord = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = attrs;
-      modules = [
-        ./configs/vconf.nix
-        disko.nixosModules.disko
-        ./disk-config.nix
-        {
-          _module.args.disks = [ "/dev/vda" ];
-          boot.loader.grub = {
-            devices = [ "/dev/vda" ];
-            efiSupport = true;
-            efiInstallAsRemovable = true;
-          };
-
-          environment.systemPackages = [
-            nixos-anywhere.packages.x86_64-linux.nixos-anywhere
-          ];
-        }
-      ];
-    };
-    diskoConfigurations.fnord = import ./disk-config.nix;
-    nixosConfigurations.hetzner-cloud-aarch64 = nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
-      specialArgs = attrs;
-      modules = [
-        ./configs/vconf.nix
-        disko.nixosModules.disko
-        ./disk-config.nix
-        {
-          _module.args.disks = [ "/dev/vda" ];
-          boot.loader.efi.canTouchEfiVariables = true;
-          boot.loader.systemd-boot.enable = true;
-          # boot.loader.grub = {
-          #   devices = [ "/dev/vda" ];
-          #   efiSupport = true;
-          #   # efiInstallAsRemovable = true;
-          # };
-        }
-      ];
-    };
+  #  diskoConfigurations.fnord = import ./disk-config.nix;
     nixosConfigurations.vultr = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = attrs;
@@ -60,29 +20,6 @@
           _module.args.disks = [ "/dev/vda" ];
           boot.loader.grub = {
             devices = [ "/dev/vda" ];
-            efiSupport = true;
-            efiInstallAsRemovable = true;
-          };
-        }
-      ];
-    };
-    nixosConfigurations.reliablesite = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = attrs;
-      modules = [
-        ./configs/reliablesite.nix
-        disko.nixosModules.disko
-        ./disk-config.nix
-        {
-          _module.args.disks = [
-            "/dev/nvme0n1"
-            "/dev/nvme1n1"
-          ];
-          boot.loader.grub = {
-            devices = [
-              "/dev/nvme0n1"
-              "/dev/nvme1n1"
-            ];
             efiSupport = true;
             efiInstallAsRemovable = true;
           };
