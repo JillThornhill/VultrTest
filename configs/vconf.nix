@@ -4,11 +4,16 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
   ];
-
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.systemPackages = [
     pkgs.vim
     pkgs.wget
+    pkgs.firefox
   ];
+
+  networking.hostName = "nixos"; # Define your hostname.
+  networking.networkmanager.enable = true;
+  nixpkgs.config.allowUnfree = true;
 
   services.openssh.enable = true;
 
