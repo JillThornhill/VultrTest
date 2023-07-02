@@ -8,7 +8,6 @@
   inputs.nixos-anywhere.inputs.nixpkgs.follows = "nixpkgs";
 
   outputs = { self, nixpkgs, disko, nixos-anywhere, ... }@attrs: {
-  #  diskoConfigurations.fnord = import ./disk-config.nix;
     nixosConfigurations.vultr = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = attrs;
